@@ -3,8 +3,8 @@ Normalizing raw data using PHP
  
  Steps:
  
- 1. run the database.php file to create the database and tables.
+ 1. Import the sql file.
  
  2. Visit the index page and upload the json file.
  
- 3. Check the view data page to see the normalized data.
+ 3. Check the displayData.php page to see the normalized data.

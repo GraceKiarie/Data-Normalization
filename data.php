@@ -74,7 +74,7 @@ class Data
             //print_r($result);
 
             foreach ($result as $row) {
-                $stores = $conn->prepare("INSERT INTO stores(`name`) VALUES(:name) ");
+                $stores = $conn->prepare("INSERT INTO stores(`storeName`) VALUES(:name) ");
                 $stores->bindValue('name', $row[0]);
                 $stores->execute();
 
@@ -99,7 +99,7 @@ class Data
             //print_r($result);
 
             foreach ($result as $row) {
-                $query = $conn->prepare("INSERT INTO question_types(`name`) VALUES(:name) ");
+                $query = $conn->prepare("INSERT INTO question_types(`questionType`) VALUES(:name) ");
                 $query->bindValue('name', $row[0]);
                 $query->execute();
             }
@@ -120,7 +120,7 @@ class Data
             $result = $query->fetchAll();
 
             foreach ($result as $row) {
-                $stores = $conn->prepare("INSERT INTO question_sub_types(`name`) VALUES(:name) ");
+                $stores = $conn->prepare("INSERT INTO question_sub_types(`questionSubType`) VALUES(:name) ");
                 $stores->bindValue('name', $row[0]);
                 $stores->execute();
             }
@@ -137,10 +137,14 @@ class Data
             $sql = $conn->query("SELECT * FROM `raw_data` ");
             $sql->execute();
             $results = $sql->fetchAll();
-            print_r($results);
 
             foreach ($results as $row) {
-                $query = $conn->prepare('INSERT INTO normalized_data SET ticketID = :ticketID,clientName = :clientName,mobileNo = :mobileNo, contactType = :contactType, callType = :callType, sourceName= :sourceName,  storeID = (SELECT id from stores where name= :storeName), questionTypeID = (SELECT id from question_types where name= :questionType),questionSubTypeID = (SELECT id from question_sub_types where name= :questionSubType), dispositionName = :dispositionName, dateCreated = :dateCreated');
+                $query = $conn->prepare('INSERT INTO normalized_data SET ticketID = :ticketID,clientName = :clientName,
+                mobileNo = :mobileNo, contactType = :contactType, callType = :callType, sourceName= :sourceName,  
+                storeID = (SELECT id from stores where storeName= :storeName), 
+                questionTypeID = (SELECT id from question_types where questionType= :questionType),
+                questionSubTypeID = (SELECT id from question_sub_types where questionSubType= :questionSubType),
+                 dispositionName = :dispositionName, dateCreated = :dateCreated');
 
                 $query->bindValue('ticketID', $row['ticketID']);
                 $query->bindValue('clientName', $row['clientName']);
@@ -161,11 +165,7 @@ class Data
         }
     }
 
-    //display data
-    public function displayData()
-    {
 
-    }
 }
 
 $run = new Data();
@@ -175,6 +175,10 @@ $run->storesTable();
 $run->questionTypesTable();
 $run->questionSubTypesTable();
 $run->saveNormalizedData();
+header('Location: /Data-Normalization/viewData.php');
+
+
+
 
 
 

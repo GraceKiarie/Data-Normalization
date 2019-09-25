@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2019 at 01:07 PM
+-- Generation Time: Sep 25, 2019 at 04:33 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -51,7 +51,7 @@ CREATE TABLE `normalized_data` (
 
 CREATE TABLE `question_sub_types` (
   `id` int(11) NOT NULL,
-  `name` varchar(191) NOT NULL
+  `questionSubType` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `question_sub_types` (
 
 CREATE TABLE `question_types` (
   `id` int(11) NOT NULL,
-  `name` varchar(191) NOT NULL
+  `questionType` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `raw_data` (
 
 CREATE TABLE `stores` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `storeName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -106,6 +106,7 @@ CREATE TABLE `stores` (
 --
 ALTER TABLE `normalized_data`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ticketID` (`ticketID`),
   ADD KEY `storeID` (`storeID`),
   ADD KEY `questionTypeID` (`questionTypeID`),
   ADD KEY `questionSubTypeID` (`questionSubTypeID`);
@@ -114,13 +115,15 @@ ALTER TABLE `normalized_data`
 -- Indexes for table `question_sub_types`
 --
 ALTER TABLE `question_sub_types`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `questionSubType` (`questionSubType`) USING BTREE;
 
 --
 -- Indexes for table `question_types`
 --
 ALTER TABLE `question_types`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `questionType` (`questionType`) USING BTREE;
 
 --
 -- Indexes for table `raw_data`
@@ -132,7 +135,8 @@ ALTER TABLE `raw_data`
 -- Indexes for table `stores`
 --
 ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `storeName` (`storeName`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -142,31 +146,31 @@ ALTER TABLE `stores`
 -- AUTO_INCREMENT for table `normalized_data`
 --
 ALTER TABLE `normalized_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
 
 --
 -- AUTO_INCREMENT for table `question_sub_types`
 --
 ALTER TABLE `question_sub_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
 
 --
 -- AUTO_INCREMENT for table `question_types`
 --
 ALTER TABLE `question_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- AUTO_INCREMENT for table `raw_data`
 --
 ALTER TABLE `raw_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=796;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1036;
 
 --
 -- AUTO_INCREMENT for table `stores`
 --
 ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- Constraints for dumped tables
