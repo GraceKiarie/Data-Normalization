@@ -1,5 +1,5 @@
 # Data-Normalization
-Normalizing raw data using PHP
+Normalizing raw data using PHP PDO
  
  Steps:
  
@@ -7,4 +7,5 @@ Normalizing raw data using PHP
  
  2. Visit the index page and upload the json file.
  
- 3. Check the displayData.php page to see the normalized data.
+ 3. Check the viewData.php page to see the normalized data.
+
