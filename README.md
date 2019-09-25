@@ -1,9 +1,10 @@
 # Data-Normalization
-Normalizing raw data using PHP
+Normalizing raw data using PHP PDO
  
  Steps:
  
  1. run the database.php file to create the database and tables.
+ alternative: import the assignment.sql file.
  
  2. Visit the index page and upload the json file.
  
